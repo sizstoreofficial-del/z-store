@@ -1,0 +1,9 @@
+{
+  "name": "zstore-payment-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Payment backend untuk Z Store menggunakan Xendit Payment API v3",
+  "main": "zstore-payment-server.js",
+  "scripts": { "start": "node zstore-payment-server.js" },
+  "engines": { "node": ">=18" }
+}

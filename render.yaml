@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: z-store-payment
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: XENDIT_SECRET_KEY
+        sync: false
+      - key: XENDIT_WEBHOOK_TOKEN
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
