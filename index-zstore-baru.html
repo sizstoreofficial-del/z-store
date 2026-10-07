@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Z Store - Top Up Game</title>
+<meta name="description" content="Z Store - layanan top up game cepat dan mudah">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
+header{background:#111827;color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:24px;font-weight:800}.logo span{color:#60a5fa}
+header a{color:#fff;text-decoration:none;font-weight:700}
+.hero{padding:55px 20px;text-align:center;background:linear-gradient(135deg,#dbeafe,#fff)}
+.hero h1{font-size:38px;margin:0 0 10px}.hero p{color:#4b5563;font-size:17px}
+.wrap{max-width:850px;margin:25px auto;padding:0 15px}.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:0 5px 20px #0000000b}
+h2{margin-top:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.option{padding:16px;border:2px solid #e5e7eb;border-radius:12px;text-align:center;cursor:pointer;background:#fff}
+.option.active{border-color:#2563eb;background:#eff6ff}
+input{width:100%;padding:13px;border:1px solid #d1d5db;border-radius:10px;font-size:16px;margin:7px 0 14px}
+button{border:0;border-radius:10px;padding:13px 18px;background:#2563eb;color:#fff;font-size:16px;font-weight:700;cursor:pointer;width:100%}
+.summary{background:#111827;color:#fff;border-radius:14px;padding:18px}.row{display:flex;justify-content:space-between;padding:7px 0}
+.total{border-top:1px solid #ffffff33;margin-top:8px;padding-top:12px;font-size:21px;font-weight:800}
+.info{margin-top:15px;padding:15px;border-radius:10px;background:#f3f4f6;display:none}
+.notice{background:#fff7ed;padding:14px;border-radius:10px;color:#9a3412}
+footer{text-align:center;background:#111827;color:#9ca3af;padding:25px}
+@media(max-width:600px){.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Z <span>STORE</span></div>
+<a href="#topup">Top Up</a>
+</header>
+
+<section class="hero">
+<h1>Top Up Game Cepat & Mudah</h1>
+<p>Pilih game, nominal, dan metode pembayaran.</p>
+</section>
+
+<main class="wrap" id="topup">
+
+<section class="card">
+<h2>🎮 Pilih Game</h2>
+<div class="grid">
+<div class="option active" onclick="game(this,'Free Fire')">🔥<br><b>Free Fire</b><br>Diamond</div>
+<div class="option" onclick="game(this,'Mobile Legends')">⚔️<br><b>Mobile Legends</b><br>Diamond</div>
+<div class="option" onclick="game(this,'PUBG Mobile')">🔫<br><b>PUBG Mobile</b><br>UC</div>
+</div>
+</section>
+
+<section class="card">
+<h2>👤 Data Akun</h2>
+<label>User ID</label>
+<input id="uid" placeholder="Masukkan User ID">
+<label>Server / Zone ID</label>
+<input id="server" placeholder="Masukkan Server ID jika ada">
+</section>
+
+<section class="card">
+<h2>💎 Pilih Nominal</h2>
+<div class="grid">
+<div class="option" onclick="nom(this,5,1000)">5 Diamond<br><b>Rp1.000</b></div>
+<div class="option" onclick="nom(this,12,2000)">12 Diamond<br><b>Rp2.000</b></div>
+<div class="option" onclick="nom(this,50,7000)">50 Diamond<br><b>Rp7.000</b></div>
+<div class="option" onclick="nom(this,70,10000)">70 Diamond<br><b>Rp10.000</b></div>
+<div class="option" onclick="nom(this,100,14000)">100 Diamond<br><b>Rp14.000</b></div>
+<div class="option" onclick="nom(this,140,19000)">140 Diamond<br><b>Rp19.000</b></div>
+<div class="option" onclick="nom(this,210,28000)">210 Diamond<br><b>Rp28.000</b></div>
+<div class="option" onclick="nom(this,355,47000)">355 Diamond<br><b>Rp47.000</b></div>
+<div class="option" onclick="nom(this,720,94000)">720 Diamond<br><b>Rp94.000</b></div>
+<div class="option" onclick="nom(this,1450,188000)">1450 Diamond<br><b>Rp188.000</b></div>
+</div>
+</section>
+
+<section class="card">
+<h2>💳 Pembayaran</h2>
+<div class="grid">
+<div class="option" onclick="pay(this,'DANA')">💙<br><b>DANA</b></div>
+<div class="option" onclick="pay(this,'GoPay')">💚<br><b>GoPay</b></div>
+<div class="option" onclick="pay(this,'QRIS')">▦<br><b>QRIS</b></div>
+</div>
+<div class="info" id="info"></div>
+</section>
+
+<section class="card">
+<h2>📋 Ringkasan</h2>
+<div class="summary">
+<div class="row"><span>Game</span><b id="sg">Free Fire</b></div>
+<div class="row"><span>User ID</span><b id="su">-</b></div>
+<div class="row"><span>Nominal</span><b id="sn">-</b></div>
+<div class="row"><span>Pembayaran</span><b id="sp">-</b></div>
+<div class="row total"><span>Total</span><b id="st">Rp0</b></div>
+<br>
+<button onclick="order()">Lanjut Pembayaran</button>
+</div>
+</section>
+
+<section class="card">
+<h2>📌 Cara Pembayaran</h2>
+<p>1. Masukkan User ID.</p>
+<p>2. Pilih nominal diamond.</p>
+<p>3. Pilih DANA, GoPay, atau QRIS.</p>
+<p>4. Bayar sesuai total pesanan.</p>
+<div class="notice"><b>DANA / GoPay:</b> 082229275469<br>Pastikan nominal transfer sesuai total pesanan.</div>
+</section>
+
+</main>
+
+<footer>Z STORE © 2026</footer>
+
+<script>
+let g="Free Fire",d=0,price=0,p="";
+const rupiah=n=>"Rp"+n.toLocaleString("id-ID");
+function game(el,x){document.querySelectorAll(".card:nth-child(1) .option").forEach(e=>e.classList.remove("active"));el.classList.add("active");g=x;sg.textContent=x}
+function nom(el,x,y){document.querySelectorAll(".card:nth-child(3) .option").forEach(e=>e.classList.remove("active"));el.classList.add("active");d=x;price=y;sn.textContent=x+" Diamond";st.textContent=rupiah(y)}
+function pay(el,x){document.querySelectorAll(".card:nth-child(4) .option").forEach(e=>e.classList.remove("active"));el.classList.add("active");p=x;sp.textContent=x;info.style.display="block";info.innerHTML=x==="QRIS"?"<b>QRIS</b><br>Gunakan aplikasi pembayaran yang mendukung QRIS.<br><br>Total: <b>"+rupiah(price)+"</b>":"<b>"+x+"</b><br>Nomor pembayaran: <b>082229275469</b><br>Total: <b>"+rupiah(price)+"</b>"}
+uid.oninput=()=>su.textContent=uid.value||"-";
+function order(){if(!uid.value.trim())return alert("Masukkan User ID.");if(!d)return alert("Pilih nominal.");if(!p)return alert("Pilih pembayaran.");alert("Pesanan siap. Silakan bayar "+rupiah(price)+" melalui "+p+" ke 082229275469.");}
+</script>
+</body>
+</html>
